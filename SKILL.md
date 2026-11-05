@@ -7,6 +7,13 @@ description: Extract, extend, or add UI in an existing frontend codebase. Preser
 
 Work from the existing project's UI, not an invented design. Choose `extract` when separating UI from a full application, `extend` when editing the resulting UI, and `add` when creating new UI alongside it. Read [references/modes.md](references/modes.md) for the selected mode.
 
+## User-directed changes
+
+- When a user requests a project change, work only within the specified feature or area and its necessary direct dependencies. Do not add adjacent features, redesign other areas, or make discretionary improvements. If changing a shared component would affect areas outside the request, ask the user before making that change.
+- If the target, behavior, wording, or visual requirement is unclear in a way that affects implementation, ask a concrete question and wait for the user's answer before editing that part. Do not resolve such gaps by guessing or changing the project on your own.
+- Do not add filler, decorative explanations, invented marketing copy, or placeholder descriptions without a real user-facing purpose. Use the project's existing terminology; ask for required wording when it is not specified.
+- Match every added or changed UI element to the project's existing visual language and color palette. Reuse its tokens, styles, and components. If the project provides no clear reference for a required visual choice, ask before introducing one.
+
 ## Boundary
 
 - During the first `extract` pass that turns a project into a standalone UI, do not change any frontend styles. Preserve style files and rules, inline styles, class names, selectors, style-related props, theme values, breakpoints, assets, and the visual output of existing states. Copy style files unchanged where possible. Replace data and backend dependencies without restyling the UI. If a screen cannot run without changing its styles, report the blocker instead of silently making a visual change.

@@ -8,3 +8,5 @@ description: Extract, extend, or add UI from an existing frontend codebase. Pres
 Read the repository's [canonical skill instructions](../../../SKILL.md) before working. Follow the relevant `extract`, `extend`, or `add` mode and resolve its references, assets, and validation script relative to the repository root.
 
 Keep work UI-only and produce the required extraction report. The first extraction must leave frontend styles unchanged; defer tokenization and component refactoring until later work. Do not introduce backend calls, persistence, authentication, or secrets.
+
+For project changes, follow only the user's specified scope. Ask and wait when a consequential detail is unclear; do not invent filler descriptions or UI that conflicts with the project's style and colors. The canonical skill contains the full rules.
