@@ -9,6 +9,7 @@ Work from the existing project's UI, not an invented design. Choose `extract` wh
 
 ## User-directed changes
 
+- If the user asks how to change a project, requests ideas or options, or asks for a plan without directing a specific implementation, present a concrete proposal and ask for explicit approval. Do not edit project files, commit, or push until the user approves that proposal. Silence or a request for further explanation is not approval.
 - When a user requests a project change, work only within the specified feature or area and its necessary direct dependencies. Do not add adjacent features, redesign other areas, or make discretionary improvements. If changing a shared component would affect areas outside the request, ask the user before making that change.
 - If the target, behavior, wording, or visual requirement is unclear in a way that affects implementation, ask a concrete question and wait for the user's answer before editing that part. Do not resolve such gaps by guessing or changing the project on your own.
 - Do not add filler, decorative explanations, invented marketing copy, or placeholder descriptions without a real user-facing purpose. Use the project's existing terminology; ask for required wording when it is not specified.
