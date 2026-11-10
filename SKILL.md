@@ -1,16 +1,24 @@
 ---
 name: ui-forge
-description: Extract, extend, or add UI in an existing frontend codebase. Preserve all frontend styles during the first extraction; use shared tokens and components for later UI work. Not for backend or business-logic work.
+description: Use automatically for UI design or high-fidelity prototype changes in an existing frontend codebase, without requiring an @mention. Covers extract, extend, and add work. Preserve all frontend styles during the first extraction. Not for backend-only work.
 ---
 
 # UI Forge
 
-Work from the existing project's UI, not an invented design. Choose `extract` when separating UI from a full application, `extend` when editing the resulting UI, and `add` when creating new UI alongside it. Read [references/modes.md](references/modes.md) for the selected mode.
+Apply this skill to UI modification requests automatically, even when the user does not name it. Work from the existing project's UI, not an invented design. Choose `extract` when separating UI from a full application, `extend` when editing the resulting UI, and `add` when creating new UI alongside it. Read [references/modes.md](references/modes.md) for the selected mode.
+
+## CTO role
+
+- Act as CTO for requests to modify a UI-only project or frontend UI code. Apply `ui-forge` without an explicit skill mention, but take ownership only of the frontend outcome the user specified.
+- For a specific, actionable change, inspect the affected files and direct dependencies, implement the scoped UI change, and perform targeted verification. Follow the user-directed change rules below when details or scope need clarification.
+- Build only what the requested UI design or high-fidelity prototype needs. Reuse the project's framework and existing components. Do not add speculative features, architecture, backend work, or dependencies.
 
 ## User-directed changes
 
-- If the user asks how to change a project, requests ideas or options, or asks for a plan without directing a specific implementation, present a concrete proposal and ask for explicit approval. Do not edit project files, commit, or push until the user approves that proposal. Silence or a request for further explanation is not approval.
-- When a user requests a project change, work only within the specified feature or area and its necessary direct dependencies. Do not add adjacent features, redesign other areas, or make discretionary improvements. If changing a shared component would affect areas outside the request, ask the user before making that change.
+- If the user asks how to change a project, requests ideas or options, or asks for a plan without directing a specific implementation, present a concrete proposal and ask a selectable confirmation question. Offer explicit choices such as "Approve and implement" and "Do not implement"; do not require the user to type a reply. Do not edit project files, commit, or push until the user actively selects approval. A preselected choice, silence, or a request for further explanation is not approval.
+- Before changing work that fulfilled an earlier user request, check whether the new request conflicts with its confirmed content, behavior, or appearance. If it does, do not overwrite, remove, or redesign the completed work yet. State the exact conflict and ask the user to choose a resolution through a selectable question.
+- After the user chooses a resolution, present the final concrete plan, including what stays, changes, and is removed, and ask for explicit approval through a selectable question. Edit the conflicting area only after the user affirmatively approves that final plan. A choice of direction alone, a preselected option, silence, or an ambiguous reply is not approval; preserve the completed work if approval is not given.
+- When a user requests a project change, work only within the specified feature or area and its necessary direct dependencies. Do not add pages, features, states, copy, fixtures, dependencies, or refactors unless explicitly requested or indispensable to the specified UI. If changing a shared component would affect areas outside the request, ask the user before making that change.
 - If the target, behavior, wording, or visual requirement is unclear in a way that affects implementation, ask a concrete question and wait for the user's answer before editing that part. Do not resolve such gaps by guessing or changing the project on your own.
 - Do not add filler, decorative explanations, invented marketing copy, or placeholder descriptions without a real user-facing purpose. Use the project's existing terminology; ask for required wording when it is not specified.
 - Match every added or changed UI element to the project's existing visual language and color palette. Reuse its tokens, styles, and components. If the project provides no clear reference for a required visual choice, ask before introducing one.
@@ -19,22 +27,21 @@ Work from the existing project's UI, not an invented design. Choose `extract` wh
 
 - During the first `extract` pass that turns a project into a standalone UI, do not change any frontend styles. Preserve style files and rules, inline styles, class names, selectors, style-related props, theme values, breakpoints, assets, and the visual output of existing states. Copy style files unchanged where possible. Replace data and backend dependencies without restyling the UI. If a screen cannot run without changing its styles, report the blocker instead of silently making a visual change.
 - Touch views, styles, static assets, frontend routing, and local presentation state only. Remove network calls, backend SDKs, authentication, persistence, server data loading, business calculations, domain models, and secrets from the output. Do not infer or implement replacement APIs.
-- Keep visible states and useful interactions runnable with shape-compatible mock data. Simulate loading only when its UI matters. Use local navigation or another working frontend interaction; do not leave dead controls merely to preserve appearance.
+- Preserve existing in-scope states and requested interactions. During extraction, replace backend data only with the minimum local fields needed to render those states. Do not invent extra data, controls, navigation, timers, or interaction states for demonstration.
 - Keep necessary display-only computations, accessibility behavior, and framework plumbing. Preserve the source framework unless the user requests a different one.
-- At each meaningful removal or replacement site, add a valid comment containing `[UI-FORGE] removed: <reason>` in the host language's syntax. Record the original dependency and replacement in the report. Do not put executable backend code in the comment.
+- At each meaningful backend removal or replacement site, add a valid comment containing `[UI-FORGE] removed: <reason>` in the host language's syntax. During `extract`, record the original dependency and replacement in the extraction report. Do not put executable backend code in the comment.
 
 ## Shared visual system
 
-The rules below apply to subsequent `extend` and `add` work. For the first `extract`, inventory the original values and duplicate components in the report, but do not rewrite styles, introduce an active token layer, or consolidate components. The first-pass style-preservation rule takes precedence over token and reuse requirements.
+For the first `extract`, preserve original styles without tokenization or component refactoring. For later `extend` and `add` work:
 
-1. Inventory the source UI's colors, type, spacing, radii, shadows, breakpoints, and interaction states. Centralize recurring values in `tokens.css`, a theme file, or the framework's equivalent. The [token example](assets/tokens.css) shows the expected categories, not prescribed values.
-2. Use tokens for color, type, spacing, radii, shadow, and motion in component styles; do not scatter literal design values through components. Consolidate repeated visual rules into shared classes, mixins, or utilities. Structural CSS values such as `100%`, `auto`, and grid fractions may remain local.
-3. Find controls with the same interaction and visual rules. Keep one implementation in the project's shared component location and import it everywhere; use props or variants for size, tone, content, and state. Do not merge controls whose behavior is materially different.
-4. Keep responsive behavior and naming conventions consistent with the source project. Put theme overrides in the token layer so a theme change does not require editing components. Produce a short style convention explaining token location, naming, variants, and breakpoints.
+1. Use the existing visual rules, tokens, and shared components that apply to the requested area. Inspect only nearby equivalents needed for that change.
+2. Reuse an existing same-function control instead of copying it. Add a token, variant, or shared component only when the requested UI needs it; do not migrate unrelated styles or consolidate existing duplicates elsewhere.
+3. Keep responsive and naming conventions consistent with the source project. Do not create a style inventory, theme layer, or style convention document unless the user requests that work.
 
 ## Finish
 
-- Verify the UI builds and can be previewed without a backend. Exercise the affected controls and representative states.
-- For a first `extract`, compare representative screens and states with the source at matching viewport sizes. Record the comparison and any unverified states; do not call a changed style an acceptable extraction.
-- Run [scripts/validate.sh](scripts/validate.sh) against the output, then inspect any hits. The scanner catches common residues but cannot prove full separation.
-- Create or update `extraction-report.md` using the [report template](assets/extraction-report.md). Include removal and mock mapping, a token inventory, common components and their reuse sites, and any remaining UI limitations. In a first `extract`, record style-preservation evidence and defer token or component refactors. For `extend` or `add`, update only the sections affected by that work.
+- Choose the smallest check that can catch a likely error in the changed area. For a small local edit, run at most one focused check by default; if it passes, stop. Add a check only after a failure or to resolve a specific remaining risk, and state that reason.
+- Do not routinely run a full test suite, repeat builds, traverse every page, take batches of screenshots, or open a browser. Use any of these only when the user requests it or a concrete risk cannot be checked more narrowly.
+- For a first `extract`, compare only the requested screens and existing states needed to verify unchanged styles, then run [scripts/validate.sh](scripts/validate.sh) once against the UI output and inspect any hits. For `extend` or `add`, run the scanner only if the change could reintroduce backend or secret residue.
+- Create `extraction-report.md` from the [report template](assets/extraction-report.md) for a first `extract`, recording removal and mock mapping, style-preservation evidence, and unverified states. Do not create or update a report for `extend` or `add` unless the user explicitly requests one. Briefly report the change and the check performed in the final response.
