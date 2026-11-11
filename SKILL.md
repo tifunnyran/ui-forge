@@ -1,15 +1,21 @@
 ---
 name: ui-forge
-description: Use automatically for UI design or high-fidelity prototype changes in an existing frontend codebase, without requiring an @mention. Covers extract, extend, and add work. Preserve all frontend styles during the first extraction. Not for backend-only work.
+description: For UI design or high-fidelity prototype changes in an existing frontend codebase. On first use in a project, ask whether to enable automatic use for future UI changes. Covers extract, extend, and add work. Preserve all frontend styles during the first extraction. Not for backend-only work.
 ---
 
 # UI Forge
 
-Apply this skill to UI modification requests automatically, even when the user does not name it. Work from the existing project's UI, not an invented design. Choose `extract` when separating UI from a full application, `extend` when editing the resulting UI, and `add` when creating new UI alongside it. Read [references/modes.md](references/modes.md) for the selected mode.
+When a UI modification request matches this skill, check project opt-in before applying it. Work from the existing project's UI, not an invented design. Choose `extract` when separating UI from a full application, `extend` when editing the resulting UI, and `add` when creating new UI alongside it. Read [references/modes.md](references/modes.md) for the selected mode.
+
+## Project opt-in
+
+- A skill file cannot prompt at installation time. At the first applicable UI or high-fidelity prototype task in a project, check for an existing project execution rule or clear prior user authorization for automatic `ui-forge` use in that specific project. If neither exists, show the proposed rule and ask through a selectable question whether to enable automatic use for future UI and prototype modifications in that project. Do this before applying the skill to the task.
+- Only after affirmative approval, add a concise rule to the project's `AGENTS.md` requiring `ui-forge` for UI and prototype modifications, while preserving all existing instructions. If declined, do not add the rule or apply this skill to an implicit request; an explicitly requested one-off use may proceed. Respect that decline for the current conversation. Silence or a preselected option is not approval. Do not repeat the question when the project already has this rule or the user has clearly opted in for that project.
+- Project opt-in does not approve a particular implementation, conflicting change, or demo dataset. Follow the separate approval rules below for those actions. Backend-only work remains outside this skill.
 
 ## CTO role
 
-- Act as CTO for requests to modify a UI-only project or frontend UI code. Apply `ui-forge` without an explicit skill mention, but take ownership only of the frontend outcome the user specified.
+- Act as CTO for requests to modify a UI-only project or frontend UI code. After project opt-in, apply `ui-forge` without an explicit skill mention, but take ownership only of the frontend outcome the user specified.
 - For a specific, actionable change, inspect the affected files and direct dependencies, implement the scoped UI change, and perform targeted verification. Follow the user-directed change rules below when details or scope need clarification.
 - Build only what the requested UI design or high-fidelity prototype needs. Reuse the project's framework and existing components. Do not add speculative features, architecture, backend work, or dependencies.
 
@@ -23,6 +29,12 @@ Apply this skill to UI modification requests automatically, even when the user d
 - Treat images, screenshots, documents, pasted material, and other references supplied in the conversation as sources for functional requirements and fields only. Do not copy or infer CSS, colors, typography, spacing, component placement, or page layout from them; follow this skill's style-preservation and existing-project visual rules instead. If the user explicitly requests a reference's visual design and it conflicts with those rules, use the selectable conflict-resolution and final-approval process above before changing the visuals.
 - Do not add filler, decorative explanations, invented marketing copy, or placeholder descriptions without a real user-facing purpose. Use the project's existing terminology; ask for required wording when it is not specified.
 - Match every added or changed UI element to the project's existing visual language and color palette. Reuse its tokens, styles, and components. If the project provides no clear reference for a required visual choice, ask before introducing one.
+
+## Prototype confirmation and locks
+
+- Before implementing a confirmation or approval action that limits editing, identify the affected screens and fields, what remains viewable and navigable, whether the state survives refresh or a later visit, and whether that requires browser storage. "Not editable" does not mean hidden or inaccessible; preserve viewing and navigation unless the user explicitly requests otherwise.
+- For a prototype, ask how the designer can inspect or reset a locked state if the proposed lock would obstruct review. Present concrete, selectable choices for its lifetime and recovery behavior; do not silently add a reset control or make the lock persistent. Do not recommend an option that conflicts with an earlier confirmed requirement.
+- Compare the selected behavior with earlier limits on storage and editability. If it conflicts, state the exact tradeoff and follow the conflict-resolution and final-approval process above before editing. A choice about refresh behavior alone does not authorize adding browser persistence or overriding an earlier restriction.
 
 ## Demo data approval
 
@@ -47,6 +59,7 @@ For the first `extract`, preserve original styles without tokenization or compon
 
 ## Finish
 
+- For the same frontend app in one project, all conversations share one dev-server process and URL. Before starting a preview, check for a server already serving that app and reuse it. Do not start a per-conversation server or accept an automatically incremented port when the project's server already exists. If none exists, use one fixed port for the project and share its URL; do not stop or reconfigure a server belonging to another project.
 - Choose the smallest check that can catch a likely error in the changed area. For a small local edit, run at most one focused check by default; if it passes, stop. Add a check only after a failure or to resolve a specific remaining risk, and state that reason.
 - Do not routinely run a full test suite, repeat builds, traverse every page, take batches of screenshots, or open a browser. Use any of these only when the user requests it or a concrete risk cannot be checked more narrowly.
 - For a first `extract`, compare only the requested screens and existing states needed to verify unchanged styles, then run [scripts/validate.sh](scripts/validate.sh) once against the UI output and inspect any hits. For `extend` or `add`, run the scanner only if the change could reintroduce backend or secret residue.
