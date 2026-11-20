@@ -1,6 +1,6 @@
 # ui-forge
-适合基于现有系统做原型和受控迭代；尤其强调保留已有成果、避免 AI 自行发挥。代价是确认环节会比较多
-原型和prd高度绑定，拒绝长文档
+适合基于现有系统做原型和受控迭代；尤其强调保留已有成果、避免 AI 自行发挥。代价是确认环节会比较多；
+原型和prd高度绑定，拒绝长文档；
 prd编辑采用简洁的md编辑器
 
 可运行的 Vue UI 原型位于 [ui-prototype](ui-prototype/)。运行方式见 [UI-PROJECT.md](ui-prototype/UI-PROJECT.md)，提取记录见 [extraction-report.md](ui-prototype/extraction-report.md)。
