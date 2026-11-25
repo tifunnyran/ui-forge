@@ -29,7 +29,7 @@ prd编辑采用简洁的md编辑器
 | `extend` | 调整布局、样式、交互或组件结构 | 沿用同一视觉系统的 UI |
 | `add` | 新增用户指定的页面或 UI 模块 | 沿用项目现有视觉系统的新模块 |
 
-Skill 入口是 [SKILL.md](SKILL.md)，模式细节见 [references/modes.md](references/modes.md)。
+Skill 入口是 [SKILL.md](SKILL.md)，提取／扩展／新增模式见 [references/modes.md](references/modes.md)，PRD 模式细节见 [references/prd/README.md](references/prd/README.md)。
 
 安装动作本身不会触发提问。首次在项目中使用本 Skill 处理 UI 或高保真原型修改时，会询问是否将自动调用规则写入该项目的 `AGENTS.md`、是否启用 PRD 模式；不再询问或记录确认方式偏好。需要确认方案时，固定先确认大方向，再分轮确认必要细节，最后请用户批准具体方案；已说明的内容不重复提问，必要确认使用可点击选项，不要求打字。只有用户明确批准自动调用后才写入项目规则及 PRD 模式选择；该规则不覆盖后端任务，也不代表批准具体修改或演示数据。
 
