@@ -1,11 +1,11 @@
-# ui-forge
+# ui-prototype-studio
 适合基于现有系统做原型和受控迭代；尤其强调保留已有成果、避免 AI 自行发挥。代价是确认环节会比较多；
 原型和prd高度绑定，拒绝长文档；
 prd编辑采用简洁的md编辑器
 
 可运行的 Vue UI 原型位于 [ui-prototype](ui-prototype/)。运行方式见 [UI-PROJECT.md](ui-prototype/UI-PROJECT.md)，提取记录见 [extraction-report.md](ui-prototype/extraction-report.md)。
 
-`ui-forge` 以已有项目的 UI 层为原料，提取出可独立预览的纯前端，再持续编辑、扩展和新增模块。保留前端交互与原项目设计语言，移除后端依赖。
+`ui-prototype-studio` 以已有项目的 UI 层为原料，提取出可独立预览的纯前端，再持续编辑、扩展和新增模块。保留前端交互与原项目设计语言，移除后端依赖。
 
 ## 新能力：点击模块，查看对应的组件 PRD
 

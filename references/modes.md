@@ -1,4 +1,4 @@
-# UI Forge modes
+# UI Prototype Studio modes
 
 ## Extract
 

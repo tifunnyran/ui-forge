@@ -1,4 +1,4 @@
-# UI Forge extraction report
+# UI Prototype Studio extraction report
 
 ## Scope and preview
 

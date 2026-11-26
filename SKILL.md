@@ -1,16 +1,16 @@
 ---
-name: ui-forge
+name: ui-prototype-studio
 description: For UI design or high-fidelity prototype changes in an existing frontend codebase, with an optional mode for writing and editing page-aligned PRDs inside the prototype. Ask for project opt-in on first use. Preserve all frontend styles during the first extraction. Not for backend-only work.
 ---
 
-# UI Forge
+# UI Prototype Studio
 
 Use this skill for UI or high-fidelity prototype work in an existing frontend. Work from the existing UI and framework; choose `extract`, `extend`, or `add` and read [references/modes.md](references/modes.md). This skill is UI-only and does not implement backend APIs or business logic.
 
 ## Project opt-in
 
-- At the first applicable UI, prototype, or PRD task, verify a project-specific opt-in for automatic `ui-forge` use and whether PRD mode is enabled. If either choice is missing, ask with short selectable questions before editing; installation itself cannot prompt, and silence or a preselected option is not approval.
-- After affirmative opt-in, add the concise rule requiring `ui-forge` for that project's UI and prototype modifications to its `AGENTS.md` without removing existing instructions. Do not ask again when recorded; a declined PRD choice stays off until the user explicitly enables it. Opt-in does not approve a particular implementation, conflict resolution, or demo data; backend-only work remains outside this skill.
+- At the first applicable UI, prototype, or PRD task, verify a project-specific opt-in for automatic `ui-prototype-studio` use and whether PRD mode is enabled. If either choice is missing, ask with short selectable questions before editing; installation itself cannot prompt, and silence or a preselected option is not approval.
+- After affirmative opt-in, add the concise rule requiring `ui-prototype-studio` for that project's UI and prototype modifications to its `AGENTS.md` without removing existing instructions. Do not ask again when recorded; a declined PRD choice stays off until the user explicitly enables it. Opt-in does not approve a particular implementation, conflict resolution, or demo data; backend-only work remains outside this skill.
 
 ## CTO role
 
